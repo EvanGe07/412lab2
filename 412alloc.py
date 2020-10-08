@@ -11,13 +11,13 @@ def main():
     try:
         opts, args = getopt.getopt(sys.argv[1:], 'x:h')
     except getopt.GetoptError as err:
-        print(err, file=sys.stderr)
+        print >> sys.stderr, err
         usage()
         sys.exit(2)
 
     if sys.argv[1].isdigit():
         if int(sys.argv[1]) > 64 or int(sys.argv[1]) < 3:
-            print("ERROR: k must be an integer between 3 and 64.", file=sys.stderr)
+            print >> sys.stderr, "ERROR: k must be an integer between 3 and 64."
         else:
             allocate(sys.argv[2], int(sys.argv[1]))
     else:
@@ -38,8 +38,8 @@ def allocate(filename, k):
 
     if result[0]:
         if parser.valid_operation == 0:
-            print("ERROR: ILOC file contained no valid operations.\n")
-            print("ERROR: Terminating.")
+            print >> sys.stdout, "ERROR: ILOC file contained no valid operations.\n"
+            print >> sys.stdout, "ERROR: Terminating."
         else:
             # core of this allocate routine
             renamer = Renamer.Renamer(parser)
@@ -48,9 +48,10 @@ def allocate(filename, k):
             allocator = AllocatorWithSpill.AllocatorWithSpill(renamer, k)
             allocator.allocate_with_spill()
             allocator.print_allocated_block()
+
     else:
-        print('\nParser found %i syntax errors in %i lines of input.' \
-                             % (parser.num_errors, parser.scanner.lineNo - 1))
+        print >> sys.stdout, '\nParser found %i syntax errors in %i lines of input.' \
+                             % (parser.num_errors, parser.scanner.lineNo - 1)
 
 
 def rename(filename):
@@ -59,28 +60,28 @@ def rename(filename):
 
     if result[0]:
         if parser.valid_operation == 0:
-            print("ERROR: ILOC file contained no valid operations.\n")
-            print("ERROR: Terminating.")
+            print >> sys.stdout, "ERROR: ILOC file contained no valid operations.\n"
+            print >> sys.stdout, "ERROR: Terminating."
         else:
             # core of this routine
             renamer = Renamer.Renamer(parser)
             renamer.rename_sr_2_live_range()
             renamer.print_renamed_block()
     else:
-        print('\nParser found %i syntax errors in %i lines of input.' \
-                             % (parser.num_errors, parser.scanner.lineNo - 1))
+        print >> sys.stdout, '\nParser found %i syntax errors in %i lines of input.' \
+                             % (parser.num_errors, parser.scanner.lineNo - 1)
 
 
 def usage():
-    print("COMP 412, Fall 2020 Local Register Allocation (Lab 2)", file=sys.stderr)
-    print("Command Syntax:", file=sys.stderr)
-    print("      412alloc k filename [-h] [-x]", file=sys.stderr)
-    print("\nRequired arguments:", file=sys.stderr)
-    print("       k        specifies the number of register available", file=sys.stderr)
-    print("       filename the pathname (absolute or relative) to the input file", file=sys.stderr)
-    print("\nOptional flags:", file=sys.stderr)
-    print("       -h        prints this message", file=sys.stderr)
-    print("       -x        peforms register renaming", file=sys.stderr)
+    print >> sys.stderr, "COMP 412, Fall 2020 Local Register Allocation (Lab 2)"
+    print >> sys.stderr, "Command Syntax:"
+    print >> sys.stderr, "      412alloc k filename [-h] [-x]"
+    print >> sys.stderr, "\nRequired arguments:"
+    print >> sys.stderr, "       k        specifies the number of register available"
+    print >> sys.stderr, "       filename the pathname (absolute or relative) to the input file"
+    print >> sys.stderr, "\nOptional flags:"
+    print >> sys.stderr, "       -h        prints this message"
+    print >> sys.stderr, "       -x        peforms register renaming"
 
 
 if __name__ == "__main__":
