@@ -51,7 +51,7 @@ def allocate(filename, k):
 
     else:
         print >> sys.stdout, '\nParser found %i syntax errors in %i lines of input.' \
-                             % (parser.num_errors, parser.scanner.lineNo - 1)
+        % (parser.num_errors, parser.scanner.lineNo - 1)
 
 
 def rename(filename):
@@ -69,7 +69,7 @@ def rename(filename):
             renamer.print_renamed_block()
     else:
         print >> sys.stdout, '\nParser found %i syntax errors in %i lines of input.' \
-                             % (parser.num_errors, parser.scanner.lineNo - 1)
+        % (parser.num_errors, parser.scanner.lineNo - 1)
 
 
 def usage():

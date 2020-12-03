@@ -1,9 +1,9 @@
 //NAME: <Zehou Ge>
 //NETID: <zg18>
 
-"COMP 412, Fall 2020 Local Register Allocation (Lab 2)"
+"COMP 412, Fall 2020 Instruction Scheduling (Lab 3)"
 "Command Syntax:"
-"      412alloc k filename [-h] [-x]"
+"      412alloc filename [-h]"
 "Required arguments:"
 "       k        specifies the number of register available"
 "       filename the pathname (absolute or relative) to the input file"
